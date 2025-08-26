@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiran Kumar | Portfolio</title>
+  <meta name="description" content="Kiran Kumar — Full‑Stack Developer & UI Designer. Projects: Money Maze Navigator, Swiggy Lite (UI), Tourist App (UI)." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;         /* deep night */
+      --panel:#0f172a80;    /* glass */
+      --text:#e6edf3;       /* soft white */
+      --muted:#93a4b8;      /* slate */
+      --brand:#60a5fa;      /* sky */
+      --brand-2:#f472b6;    /* pink */
+      --accent:#facc15;     /* amber */
+      --card:#10192f;       /* card base */
+      --border:#22314d;     /* borders */
+      --glow:0 0 40px rgba(96,165,250,.4);
+      --radius:22px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 800px at 15% -10%, #1a2650 0%, transparent 50%),
+                               radial-gradient(1000px 700px at 90% 10%, #3b1c4f 0%, transparent 45%),
+                               var(--bg);
+               color:var(--text); font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; scroll-behavior:smooth}
+    a{color:var(--brand); text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* NAVBAR */
+    .nav{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:linear-gradient( to bottom, rgba(15,23,42,.65), rgba(15,23,42,.15)); border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{max-width:1100px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px}
+    .brand-dot{width:10px;height:10px;border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 12px rgba(96,165,250,.8)}
+    .menu{display:flex; gap:22px}
+    .menu a{color:var(--text); opacity:.9}
+    .menu a:hover{opacity:1}
+    .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:10px}
+
+    /* HERO */
+    .hero{max-width:1100px; margin:0 auto; padding:80px 20px 40px; display:grid; grid-template-columns:1.3fr .7fr; gap:30px; align-items:center}
+    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.03)}
+    .kicker .pulse{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 6px rgba(250,204,21,.2)}
+    .title{font-size:clamp(28px, 5vw, 56px); font-weight:800; line-height:1.05; margin:14px 0 10px; letter-spacing:.2px}
+    .title .grad{background:linear-gradient(90deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:var(--glow)}
+    .subtitle{color:var(--muted); max-width:60ch}
+    .cta{margin-top:26px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{padding:12px 18px; border-radius:14px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02)); color:var(--text); box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-2px); transition:.2s ease}
+    .btn.primary{background:linear-gradient(135deg, rgba(96,165,250,.25), rgba(244,114,182,.25)); border-color:transparent}
+
+    .hero-card{position:relative; border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); padding:26px; box-shadow:var(--shadow)}
+    .hero-card::after{content:""; position:absolute; inset:0; border-radius:var(--radius); pointer-events:none; box-shadow:inset 0 0 40px rgba(255,255,255,.06)}
+    .badges{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .badge{padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:rgba(0,0,0,.15); font-size:12px; color:var(--muted)}
+
+    /* SECTIONS */
+    section{max-width:1100px; margin:0 auto; padding:60px 20px}
+    .sec-title{font-size:28px; margin:0 0 18px 0}
+    .muted{color:var(--muted)}
+
+    /* GRID */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+
+    /* GLASS CARDS */
+    .card{grid-column:span 12; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); padding:20px; position:relative; overflow:hidden}
+    .card:hover{transform:translateY(-4px); transition:.2s ease; box-shadow:0 15px 35px rgba(0,0,0,.45)}
+
+    /* ABOUT */
+    .about-wrap{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+    .list{list-style:none; padding:0; margin:0}
+    .list li{padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.06)}
+
+    /* PROJECTS */
+    .projects .card{display:flex; flex-direction:column; gap:10px}
+    .tag{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
+    .tags{display:flex; flex-wrap:wrap; gap:8px}
+    .card h3{margin:2px 0 4px}
+    .card .actions{display:flex; gap:10px; margin-top:auto}
+
+    /* CONTACT */
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .contact-item{padding:18px; border-radius:16px; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08)}
+
+    /* FOOTER */
+    footer{border-top:1px solid rgba(255,255,255,.06); padding:24px 20px; text-align:center; color:var(--muted)}
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; padding-top:60px}
+      .about-wrap{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .menu{display:none}
+      .menu-btn{display:inline-flex}
+    }
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0; transform:translateY(20px); transition: all .6s ease}
+    .reveal.visible{opacity:1; transform:translateY(0)}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="brand-dot"></span> Kiran Kumar</div>
+      <div class="menu" id="menu">
+        <a href="#about">About</a>
+        <a href="#Techskills">TechSkills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="menu-btn" id="menuBtn">Menu</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <!-- Hero Section -->
+<section id="hero" class="min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 md:px-20">
+  <div class="flex-1">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, I’m <span class="text-indigo-400">Kiran Kumar</span></h1>
+    <p class="text-lg text-gray-300 mb-6">Java Developer • Full-Stack Developer • UI Designer</p>
+    <a href="#projects" class="px-6 py-3 bg-indigo-500 rounded-full shadow-lg hover:bg-indigo-600 transition">View My Work</a>
+  </div>
+
+  <!-- Profile Photo -->
+  <!-- Profile Photo -->
+<!-- Profile Photo -->
+<div class="flex-1 mt-8 md:mt-0 flex flex-col items-center">
+  <!-- Circular Profile Image -->
+  <!-- ...existing code... -->
+<div style="width:300px; height:300px; border-radius:50%; overflow:hidden; box-shadow:0 4px 16px rgba(96,165,250,.25); border:4px solid #60a5fa; margin:auto;">
+  <img id="profileImage" src="c:\Users\KIRAN KUMAR\Downloads\IMG-20240203-WA0005 (2).jpg" alt="Kiran Kumar" style="width:100%; height:100%; object-fit:cover;">
+</div>
+<!-- ...existing code... -->
+
+  <!-- Edit Photo Button -->
+  
+<script>
+  // Load saved photo from localStorage if available
+  window.onload = function() {
+    const savedPhoto = localStorage.getItem("profilePhoto");
+    if (savedPhoto) {
+      document.getElementById('profileImage').src = savedPhoto;
+    }
+  };
+
+  // Preview & save new photo
+  function previewPhoto(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgSrc = e.target.result;
+        document.getElementById('profileImage').src = imgSrc;
+        localStorage.setItem("profilePhoto", imgSrc); // Save to localStorage
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+
+
+
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <h2 class="sec-title">About</h2>
+    <div class="about-wrap">
+      <div class="card">
+        <p>I’m a full‑stack developer and UI designer who enjoys turning ideas into fast, usable products. I balance <strong>clean design</strong> with <strong>practical engineering</strong>, focusing on accessibility, performance, and maintainable code.</p>
+        <ul class="list">
+          <li>🎓 B.Tech CSE — Sri Vasavi Engineering College </li>
+          <li>🧰 Stack — React.js,  MySQL, MongoDB</li>
+          <li>💬 Languages — Java, C++, Python, JavaScript</li>
+          <li>🎨 UI/UX — Figma, mobile‑first, glassmorphism, motion</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Highlights</h3>
+        <ul class="list">
+          <li>Built <strong>Money Maze Navigator</strong> — personal finance manager with charts & analytics.</li>
+          <li>Designed <strong>Swiggy Lite</strong> — mobile‑first food delivery UI kit in Figma.</li>
+          <li>Created <strong>Tourist App</strong> UI — custom action bar, likes, and filters.</li>
+          <li>Deployed static sites to Netlify/Vercel with CI from GitHub.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="Techskills" class="reveal">
+    <h2 class="sec-title">Techskills</h2>
+    <div class="grid">
+      <div class="card" style="grid-column:span 6">
+        <h3>Frontend</h3>
+        <div class="tags">
+          <span class="tag">React.js</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <spam class="tag">UI/UX</spam>
+        </div>
+      </div>
+      <div class="card" style="grid-column:span 6">
+        <h3>Backend</h3>
+        <div class="tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="card" style="grid-column:span 6">
+        <h3>Languages</h3>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="card" style="grid-column:span 6">
+        <h3>Tools</h3>
+        <div class="tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Figma</span>
+          <span class="tag">VS Code</span>
+          <spam class="tag">Eclips</spam>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects reveal">
+    <h2 class="sec-title">Projects</h2>
+    <div class="grid">
+      <!-- Money Maze Navigator -->
+      <!-- ...existing code... -->
+<!-- ...existing code... -->
+<article class="card" style="grid-column:span 12">
+  <h3>🌀 Money Maze Navigator</h3>
+  <p class="muted">Personal finance management tool to track expenses, categorize spending, and visualize patterns with charts & graphs.</p>
+  <div class="tags">
+    <span class="tag">Node.js</span>
+    <span class="tag">Express</span>
+    <span class="tag">MySQL</span>
+    <span class="tag">HTML</span>
+    <span class="tag">CSS</span>
+    <span class="tag">JavaScript</span>
+  </div>
+  <div class="actions">
+    <a class="btn" href="https://github.com/kirankumarp1026/Money-Maze-Navigator-mini-project-" target="_blank" rel="noreferrer">GitHub Repo</a>
+  </div>
+</article>
+<!-- ...existing code... --
+<!-- ...existing code... -->
+
+      <!-- Swiggy Lite (UI/UX) -->
+      <!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<article class="card" style="grid-column:span 12">
+  <h3>🍴 Swiggy Lite (UI/UX)</h3>
+  <p class="muted">Mobile‑first food delivery app designed in Figma. Includes Splash, Auth, Home, Menu, Cart, and Order Confirmation screens with reusable components.</p>
+  <div class="tags">
+    <span class="tag">Figma</span>
+    <span class="tag">UI/UX</span>
+    <span class="tag">Mobile‑first</span>
+    <span class="tag">Case Study</span>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="https://www.figma.com/proto/f9L9M2bsmOl2HCd4KqhLcI/Untitled?node-id=27-42&p=f&t=cHb57GXZo6TDgW2T-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=27%3A42" target="_blank" rel="noreferrer">Figma File</a>
+    <a class="btn" href="file:///C:/Users/KIRAN%20KUMAR/OneDrive/Pictures/Screenshots/Screenshot%202025-07-31%20190506.png" target="_blank" rel="noreferrer">Prototyping File</a>
+  </div>
+</article>
+<!-- ...existing code... -->
+<!-- ...existing code... --
+<!-- ...existing code... -->
+
+      <!-- Tourist App (UI/UX) -->
+     <!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<article class="card" style="grid-column:span 12">
+  <h3>🌍 Tourist App (UI/UX)</h3>
+  <p class="muted">Tourist places app with a unique action bar, like (heart) interactions, and checkbox filters for a smooth discovery flow.</p>
+  <div class="tags">
+    <span class="tag">Figma</span>
+    <span class="tag">UI/UX</span>
+    <span class="tag">Prototype</span>
+  </div>
+  <div class="actions">
+    <a class="btn primary" href="https://www.figma.com/proto/sqWCPdO5tMNuAX402Dg4wC/Untitled?node-id=9-216&p=f&t=2QUUA4Xh8ImgGo13-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=9%3A216&show-proto-sidebar=1" target="_blank" rel="noreferrer">Design File</a>
+    <a class="btn" href="file:///C:/Users/KIRAN%20KUMAR/OneDrive/Pictures/Screenshots/Screenshot%202025-08-14%20203021.png" target="_blank" rel="noreferrer">Prototyping File</a>
+  </div>
+</article>
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+</section>
+<!-- ...existing code... -->
+
+<!-- RESUME SECTION -->
+<!-- ...existing code... -->
+</section> <!-- End of About section -->
+
+<section id="resume" class="reveal">
+  <h2 class="sec-title">Resume</h2>
+  <div class="card" style="max-width:400px; margin:auto; text-align:center;">
+    <p>You can view or download my resume below:</p>
+    <a class="btn primary" href="https://drive.google.com/file/d/1uBC_eLOXDJpVZ5sm_qbA0VIlk8MT0K9u/view?usp=drive_link" target="_blank" rel="noreferrer">View Resume</a>
+  </div>
+</section>
+
+<!-- ...existing code... -->
+
+<!-- ...existing code... -->
+<!-- Add this section after the Resume section and before the Contact section -->
+
+<!-- Add this section after the Resume section and before the Contact section -->
+
+<section id="certifications" class="reveal">
+  <h2 class="sec-title">Certifications</h2>
+  <div class="grid">
+    <!-- Certification 1 -->
+    <article class="card" style="grid-column:span 6">
+      <h3>Azure AI Fundamentals </h3>
+      <p class="muted">Completed Azure AI Fundamentals (Global) certification from Microsoft.</p>
+      <div class="actions">
+        <a class="btn" href="https://drive.google.com/file/d/1vg8bZ5sTG0_SSAVhpLkA2o2UVS7kn_oB/view?usp=drive_link" target="_blank" rel="noreferrer">View Certificate</a>
+      </div>
+    </article>
+    <!-- Certification 2 -->
+    <article class="card" style="grid-column:span 6">
+      <h3>Oracle</h3>
+      <p class="muted">Oracle Certified Associate – MySQL Implementation Certified Associate (Global) from Oracle University!.</p>
+      <div class="actions">
+        <a class="btn" href="https://drive.google.com/file/d/1w3-Ff8efRGAjCKtYKriW0vzPYYMQc_8D/view?usp=drive_link" target="_blank" rel="noreferrer">View Certificate</a>
+      </div>
+    </article>
+    <!-- Certification 3 -->
+    <article class="card" style="grid-column:span 6">
+      <h3>Oracle Certified Professional(OCP)</h3>
+      <p class="muted">Oracle cloud infrastructure 2025 (global)certified data science professional.</p>
+      <div class="actions">
+        <a class="btn" href="https://drive.google.com/file/d/1vsYJcissFNodyEbJPx5M-bBPQhM4OqqY/view?usp=drive_link" target="_blank" rel="noreferrer">View Certificate</a>
+      </div>
+    </article>
+    <!-- Certification 4 -->
+    <article class="card" style="grid-column:span 6">
+      <h3>Java Script</h3>
+      <p class="muted">completed  8-weeks course on Java Script with certification from the GeeksforGeeks.</p>
+      <div class="actions">
+        <a class="btn" href="https://drive.google.com/file/d/1vdlV4szu2Z_7tbEnCuvJ-GX9lyop-qVr/view?usp=drive_link" target="_blank" rel="noreferrer">View Certificate</a>
+      </div>
+    </article>
+    <!-- Add more certifications as
+    <!-- Add more certifications as needed, following the same structure -->
+  </div>
+</section>
+  <!-- CONTACT -->
+  <!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<section id="contact" class="reveal">
+  <h2 class="sec-title" style="text-align:center;">Contact Me</h2>
+  <div class="contact-flex" style="display:flex; flex-direction:row; gap:40px; justify-content:center; align-items:flex-start; flex-wrap:nowrap;">
+    <!-- Left: Contact Info (all info and buttons in one column) -->
+    <div style="flex:1; min-width:260px; max-width:340px; display:flex; flex-direction:column; gap:32px;">
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span style="background:#6c47e6; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" fill="#fff"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1v3.61a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.61a1 1 0 011 1c0 1.21.2 2.4.57 3.56a1 1 0 01-.24 1.01l-2.2 2.22z"/></svg>
+        </span>
+        <div>
+          <div style="font-weight:600;">Phone</div>
+          <div style="color:#b3b3b3;">+91 9014268313</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span style="background:#6c47e6; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" fill="#fff"><path d="M2 6.5A2.5 2.5 0 014.5 4h15A2.5 2.5 0 0122 6.5v13a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 19.5v-13zm2.5-.5a.5.5 0 00-.5.5v.379l8 5.333 8-5.333V6.5a.5.5 0 00-.5-.5h-15zm16 2.121l-7.47 4.98a1 1 0 01-1.06 0L3 8.121V19.5a.5.5 0 00.5.5h15a.5.5 0 00.5-.5V8.121z"/></svg>
+        </span>
+        <div>
+          <div style="font-weight:600;">Email</div>
+          <div style="color:#b3b3b3;">kiranpedamurthi@gmail.com</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span style="background:#6c47e6; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" fill="#fff"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg>
+        </span>
+        <div>
+          <div style="font-weight:600;">Location</div>
+          <div style="color:#b3b3b3;">Andhra Pradesh, India</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span style="background:#6c47e6; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 10.268h-3v-4.604c0-1.099-.021-2.513-1.531-2.513-1.531 0-1.767 1.197-1.767 2.434v4.683h-3v-9h2.881v1.229h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.599v4.735z"/></svg>
+        </span>
+        <div>
+          <div style="font-weight:600;">LinkedIn</div>
+          <button onclick="window.open('https://www.linkedin.com/in/kiran-kumar-pedamurthi-a00759333','_blank')" style="margin-top:6px; padding:8px 18px; border-radius:8px; border:none; background:#6c47e6; color:#fff; font-weight:600; cursor:pointer;">LinkedIn</button>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span style="background:#6c47e6; border-radius:50%; width:48px; height:48px; display:flex; align-items:center; justify-content:center;">
+          <svg width="26" height="26" fill="#fff" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 013.003-.404c1.018.005 2.045.138 3.003.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </span>
+        <div>
+          <div style="font-weight:600;">GitHub</div>
+          <button onclick="window.open('https://github.com/kirankumarp1026','_blank')" style="margin-top:6px; padding:8px 18px; border-radius:8px; border:none; background:#6c47e6; color:#fff; font-weight:600; cursor:pointer;">GitHub</button>
+        </div>
+      </div>
+    </div>
+    <!-- Right: Contact Form -->
+    <form action="https://formspree.io/f/xjkevonq" method="POST" style="flex:2; min-width:320px; max-width:500px; display:flex; flex-direction:column; gap:18px; background:rgba(255,255,255,0.03); border-radius:16px; padding:28px 24px;">
+      <input type="text" name="name" placeholder="Your Name" required style="padding:14px; border-radius:8px; border:none; background:#232b3b; color:#fff; font-size:16px;">
+      <input type="email" name="email" placeholder="Your Email" required style="padding:14px; border-radius:8px; border:none; background:#232b3b; color:#fff; font-size:16px;">
+      <textarea name="message" placeholder="Your Message" required rows="4" style="padding:14px; border-radius:8px; border:none; background:#232b3b; color:#fff; font-size:16px; resize:vertical;"></textarea>
+      <button type="submit" style="padding:14px; border-radius:8px; border:none; background:#8f4fff; color:#fff; font-size:18px; font-weight:600; cursor:pointer; margin-top:10px;">Send Message</button>
+    </form>
+  </div>
+</section>
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+<!-- ...existing code... -->
+
+  <footer>
+    © <span id="year"></span> Kiran Kumar • Built with HTML, CSS & JS • Deployed on Netlify/Vercel
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn?.addEventListener('click',()=>{
+      const isOpen = getComputedStyle(menu).display !== 'none';
+      menu.style.display = isOpen ? 'none' : 'flex';
+      menu.style.flexDirection = 'column';
+      menu.style.gap = '12px';
+    });
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll reveal animations
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach((e)=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); }
+      })
+    },{threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
